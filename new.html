@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp gửi anh Hoàng</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            font-family: 'Arial', sans-serif;
+            overflow-y: auto;
+        }
+        .card {
+            background: #fff;
+            width: 600px;
+            max-width: 90%;
+            margin: 20px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+            text-align: justify;
+            line-height: 1.6;
+            animation: slideIn 1.5s ease-out;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            animation: pulse 1s infinite;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, #ff6f61, #ffb88c);
+        }
+        .card h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .card p {
+            color: #555;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .signature {
+            font-style: italic;
+            color: #888;
+            margin-top: 20px;
+            text-align: right;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+            text-align: center;
+        }
+        .highlight {
+            color: #ff6f61;
+            font-weight: bold;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @media (max-width: 600px) {
+            .card {
+                margin: 15px;
+                padding: 20px;
+            }
+            .card h2 {
+                font-size: 20px;
+            }
+            .card p {
+                font-size: 14px;
+            }
+            .footer {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="sparkleCanvas"></canvas>
+    <div class="card">
+        <h2>Thiệp gửi anh Hoàng</h2>
+        <p>Em chào anh Hoàng,</p>
+        <p>Em là Hg – thực tập sinh ngày mới vào công ty còn loay hoay không biết phải làm gì. May mắn là anh là người đầu tiên chủ động hỏi thăm và giúp đỡ em lúc đó. Những câu hỏi đơn giản của anh làm em cảm thấy đỡ căng thẳng và dễ chịu hơn rất nhiều, em thực sự biết ơn anh về điều đó.</p>
+        <p>Hehe, em biết anh luôn cố gắng làm tốt công việc, và mặc dù anh lúc nào cũng tỏ ra vui vẻ, vô tư, nhưng em cũng hiểu đôi khi anh cảm thấy không tự tin về bản thân. Tuy nhiên, em tin rằng anh có rất nhiều <span class="highlight">khả năng và tiềm năng</span> mà chỉ cần anh tự tin hơn một chút là mọi thứ sẽ suôn sẻ hơn nhiều.</p>
+        <p>Hy vọng anh sẽ tìm được niềm vui thực sự và không phải chỉ "tỏ ra" vui vẻ. Cũng mong anh bớt thuốc và nhậu nhẹt để có thêm sức khỏe, vui vẻ thật sự và tự tin vào chính mình. Anh xứng đáng có được một cuộc sống <span class="highlight">thoải mái và hạnh phúc</span>!</p>
+        <p>Chúc anh ngày càng tốt lên, luôn duy trì phong độ và đừng quên rằng anh thực sự giỏi và đáng mến như thế nào nhé!</p>
+        <p><strong>Note:</strong> Ban đầu em cũng định viết thư tay để kèm theo món quà nhỏ, nhưng tiếc là không kịp chuẩn bị thiệp, nên em gửi vài dòng online này thay cho lời cảm ơn chân thành nhất ạ và gọi là một chút kỷ niệm nhỏ…</p>
+        <p>Mỗi người trong TE đều để lại cho em những ấn tượng rất riêng, nên em viết riêng từng vài dòng cho từng anh/chị – mong mọi người thấy vui và đọc xong không cười em “dài dòng văn tự” là được 😄</p>
+        <p>Sau này nếu có dịp, em xin mời mọi người lên <span class="highlight">Sơn La</span> chơi cho biết “vùng đất cao nguyên nắng gió” – có chè, có sữa, có mận, có đào và cả em làm hướng dẫn viên miễn phí luôn ạ!</p>
+        <div class="signature">From,<br>Hg</div>
+    </div>
+    <script>
+        const canvas = document.getElementById('sparkleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 4 + 2;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 1.5 + 0.5;
+                this.opacity = Math.random() * 0.6 + 0.4;
+                this.color = ['#FFD700', '#FF69B4', '#00CED1'][Math.floor(Math.random() * 3)];
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.opacity -= 0.005;
+                if (this.opacity <= 0 || this.y > canvas.height) {
+                    this.y = 0;
+                    this.x = Math.random() * canvas.width;
+                    this.opacity = Math.random() * 0.6 + 0.4;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        function init() {
+            particles = [];
+            for (let i = 0; i < 120; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+    </script>
+</body>
+</html>
